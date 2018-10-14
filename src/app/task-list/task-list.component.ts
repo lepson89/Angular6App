@@ -7,19 +7,15 @@ import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 })
 export class TaskListComponent {
 
-  newTask: string;
   @Input()
   taskList: Array<string> = [];
   @Output()
   eventTask = new EventEmitter<string>();
   doneTaskList: Array<string> = [];
-  isDisabled = true;
 
-  add() {
-    this.taskList.push(this.newTask);
-    this.newTask = '';
+  add(event: string) {
+    this.taskList.push(event);
     console.log(this.taskList);
-    this.changeButton();
   }
 
   remove(task: string) {
@@ -32,8 +28,8 @@ export class TaskListComponent {
     this.remove(task);
   }
 
-  changeButton() {
-    this.isDisabled = this.newTask.length === 0 ? true : false;
+  getColor(): string {
+    return this.taskList.length > 4 ? 'red' : 'green';
   }
 
 }

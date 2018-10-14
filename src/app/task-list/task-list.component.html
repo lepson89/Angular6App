@@ -1,44 +1,18 @@
 <div style="display: inline-flex; margin-bottom: 5%; margin-top: 5%;">
-  <input placeholder="Nowe zadanie" class="form-control" style="width: 100%; margin-right: 12px;" [(ngModel)]="newTask" (keyup)="changeButton()">
-  <button [disabled]="isDisabled" class="btn btn-info" (click)="add()">DODAJ</button>
+ <app-add-task (evenTask)="add($event)"></app-add-task>
 </div>
 <table class="table table-dark">
   <thead class="thead-dark">
-    <th>Lista do wykonania</th>
+    <th [ngStyle]="{color: getColor()}" >Lista do wykonania, ilosc: {{taskList.length}}</th>
     <th>Lista zadań wykonanych</th>
   </thead>
   <tbody>
   <tr>
     <td>
-      <table class="table">
-        <th>Lp.</th>
-        <th>Nazwa</th>
-        <th>Usuń</th>
-        <th>Zrobione</th>
-        <tr *ngFor="let task of taskList; let i = index">
-          <td>
-            {{i}}
-          </td>
-          <td>
-            {{task}}
-          </td>
-          <td>
-            <button class="btn btn-info" (click)="remove(task)">Usuń</button>
-          </td>
-          <td>
-            <button class="btn btn-info" (click)="done(task)">Zrobione</button>
-          </td>
-        </tr>
-      </table>
+     <app-todo-task [taskList]="taskList" (emitDone)="done($event)" (emitRemove)="remove($event)"></app-todo-task>
     </td>
     <td>
-      <div class="table">
-        <ul>
-          <li *ngFor="let task of doneTaskList">
-            {{task}}
-          </li>
-        </ul>
-      </div>
+      <app-done-task [taskDone]="doneTaskList"></app-done-task>
     </td>
   </tr>
   </tbody>

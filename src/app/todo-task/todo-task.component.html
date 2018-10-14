@@ -1,0 +1,20 @@
+<table class="table">
+  <th>Lp.</th>
+  <th>Nazwa</th>
+  <th>Usuń</th>
+  <th>Zrobione</th>
+  <tr *ngFor="let task of taskList; let i = index; let odd = odd" [ngClass]="{'odd-row': odd}">
+    <td>
+      {{i}}
+    </td>
+    <td>
+      {{task}}
+    </td>
+    <td>
+      <button class="btn btn-info" (click)="remove(task)">Usuń</button>
+    </td>
+    <td>
+      <button class="btn btn-info" (click)="done(task)">Zrobione</button>
+    </td>
+  </tr>
+</table>
